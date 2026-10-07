@@ -1,17 +1,19 @@
 package com.martinssluis.gerenciador_pedidos_alura.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name="produtos")
 public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true, nullable = false)
     private String nome;
+
+    @Column(name = "valor")
     private Double preco;
 
     public Produto(Long id, String nome, Double preco) {
