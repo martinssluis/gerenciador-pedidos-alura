@@ -14,6 +14,8 @@ public class Pedido {
     private Long id;
     private LocalDate data;
 
+    public Pedido(){}
+
     public Pedido(Long id, LocalDate data) {
         this.id = id;
         this.data = data;
