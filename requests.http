@@ -1,0 +1,50 @@
+### Testes da API. No IntelliJ: abra este arquivo e clique na setinha verde de cada requisicao.
+### No Postman/Insomnia: copie metodo, URL e corpo.
+
+### 1. Listar produtos (JPA puro)
+GET http://localhost:8080/produtos
+
+### 2. Cadastrar produto (JPA puro)
+POST http://localhost:8080/produtos
+Content-Type: application/json
+
+{ "nome": "Teclado mecanico", "preco": 349.90, "estoque": 20, "categoriaId": 3 }
+
+### 3. Criar pedido -> PKG_PEDIDOS.CRIAR_PEDIDO (parametro OUT devolve o id)
+POST http://localhost:8080/pedidos
+Content-Type: application/json
+
+{ "cliente": "Luis Martins" }
+
+### 4. Adicionar item -> PKG_PEDIDOS.ADICIONAR_ITEM (troque o 1 pelo id do pedido criado)
+POST http://localhost:8080/pedidos/1/itens
+Content-Type: application/json
+
+{ "produtoId": 1, "quantidade": 2 }
+
+### 5. Forcar erro de estoque (Fone Bluetooth tem 2 unidades) -> espera 422 com ORA-20003
+POST http://localhost:8080/pedidos/1/itens
+Content-Type: application/json
+
+{ "produtoId": 5, "quantidade": 10 }
+
+### 6. Ver pedido: usa JPA + a FUNCTION CALCULAR_TOTAL
+GET http://localhost:8080/pedidos/1
+
+### 7. Finalizar -> chamado via @Procedure no PedidoRepository
+POST http://localhost:8080/pedidos/1/finalizar
+
+### 8. Tentar adicionar item em pedido finalizado -> espera 422 com ORA-20004
+POST http://localhost:8080/pedidos/1/itens
+Content-Type: application/json
+
+{ "produtoId": 4, "quantidade": 1 }
+
+### 9. Cancelar (devolve estoque) -> PKG_PEDIDOS.CANCELAR_PEDIDO
+POST http://localhost:8080/pedidos/1/cancelar
+
+### 10. Listar pedidos do cliente -> procedure que devolve SYS_REFCURSOR
+GET http://localhost:8080/pedidos?cliente=luis
+
+### 11. Pedido inexistente -> espera 404
+GET http://localhost:8080/pedidos/99999
