@@ -1,0 +1,18 @@
+# Sobe um Oracle Database Free (23ai) local.
+# Uso: docker compose up -d   (a primeira vez demora alguns minutos para baixar)
+# Pronto quando o log mostrar "DATABASE IS READY TO USE!":  docker logs -f oracle-pedidos
+services:
+  oracle:
+    image: gvenzl/oracle-free:slim-faststart
+    container_name: oracle-pedidos
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: senha123        # senha dos usuarios SYS e SYSTEM (admin)
+      APP_USER: pedidos                # usuario da aplicacao, criado automaticamente
+      APP_USER_PASSWORD: pedidos123
+    volumes:
+      - oracle-data:/opt/oracle/oradata  # os dados sobrevivem quando o container para
+
+volumes:
+  oracle-data:
