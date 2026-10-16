@@ -30,9 +30,10 @@
 		<java.version>25</java.version>
 	</properties>
 	<dependencies>
+		<!-- API REST (controllers). Inclui o spring-boot-starter. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
 		</dependency>
 
 		<dependency>
@@ -52,9 +53,11 @@
 			<version>3.0.0</version>
 		</dependency>
 
+		<!-- Driver JDBC do Oracle (substitui o do PostgreSQL). Versao gerenciada pelo Spring Boot. -->
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc11</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 

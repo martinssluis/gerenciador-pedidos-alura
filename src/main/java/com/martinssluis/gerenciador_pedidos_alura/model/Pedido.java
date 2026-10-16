@@ -1,31 +1,52 @@
 package com.martinssluis.gerenciador_pedidos_alura.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Immutable;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Pedidos sao CRIADOS e ALTERADOS pelo package PL/SQL (pkg_pedidos).
+ * O JPA aqui e usado so para LEITURA: @Immutable impede o Hibernate de fazer INSERT/UPDATE.
+ */
 @Entity
-@Table
+@Immutable
+@Table(name = "pedidos")
 public class Pedido {
 
     @Id
     private Long id;
+
+    private String cliente;
+
+    @Column(name = "data_pedido")
     private LocalDate data;
 
-    public Pedido(){}
+    private String status;
 
-    public Pedido(Long id, LocalDate data) {
-        this.id = id;
-        this.data = data;
-    }
+    @Column(name = "valor_total")
+    private BigDecimal valorTotal;
+
+    public Pedido() {}
 
     public Long getId() {
         return id;
     }
 
+    public String getCliente() {
+        return cliente;
+    }
+
     public LocalDate getData() {
         return data;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public BigDecimal getValorTotal() {
+        return valorTotal;
     }
 }
