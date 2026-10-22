@@ -25,12 +25,11 @@ public class Principal {
     }
 
     public void salvarNoBanco(){
-        Produto produto = new Produto("Iphone 17 Pro", 7799.00);
-        Categoria categoria = new Categoria(1L, "Celulares");
+        Categoria categoria = categoriaRepository.save(new Categoria(1L, "Celulares"));
+        Produto produto = new Produto("Iphone 17 Pro", 7799.00, categoria);
         Pedido pedido = new Pedido(1L, LocalDate.now());
 
         produtoRepository.save(produto);
-        categoriaRepository.save(categoria);
         pedidoRepository.save(pedido);
     }
 
@@ -39,6 +38,15 @@ public class Principal {
 
         if(produtos.isEmpty()){
             System.out.println("Nenhum produto encontrado com: " + nomeProduto);
+        }else {
+            produtos.forEach(System.out::println);
+        }
+    }
+
+    public void findByCategoria(String categoriaNome) {
+        List<Produto> produtos = produtoRepository.findByCategoriaNome(categoriaNome);
+        if(produtos.isEmpty()){
+            System.out.println("Nenhum produto encontrado com a categoria : " + categoriaNome);
         }else {
             produtos.forEach(System.out::println);
         }
