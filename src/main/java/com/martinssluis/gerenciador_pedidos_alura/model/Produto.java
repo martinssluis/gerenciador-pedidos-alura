@@ -16,11 +16,16 @@ public class Produto {
     @Column(name = "valor")
     private Double preco;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
     public Produto(){}
 
-    public Produto(String nome, Double preco) {
+    public Produto(String nome, Double preco, Categoria categoria) {
         this.nome = nome;
         this.preco = preco;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -35,12 +40,15 @@ public class Produto {
         return preco;
     }
 
+    public Categoria getCategoria() { return categoria; }
+
     @Override
     public String toString() {
         return "Produto: [" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", preco=" + preco +
+                ", categoria=" + categoria +
                 ']';
     }
 }
