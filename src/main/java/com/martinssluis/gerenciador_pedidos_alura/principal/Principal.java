@@ -9,6 +9,7 @@ import com.martinssluis.gerenciador_pedidos_alura.repository.ProdutoRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 public class Principal {
@@ -31,5 +32,15 @@ public class Principal {
         produtoRepository.save(produto);
         categoriaRepository.save(categoria);
         pedidoRepository.save(pedido);
+    }
+
+    public void buscarProdutoPorNome(String nomeProduto){
+        List<Produto> produtos = produtoRepository.findByNomeContainingIgnoreCase(nomeProduto);
+
+        if(produtos.isEmpty()){
+            System.out.println("Nenhum produto encontrado com: " + nomeProduto);
+        }else {
+            produtos.forEach(System.out::println);
+        }
     }
 }
