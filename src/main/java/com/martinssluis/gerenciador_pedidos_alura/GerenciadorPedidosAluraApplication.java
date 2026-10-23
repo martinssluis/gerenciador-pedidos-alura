@@ -21,7 +21,8 @@ public class GerenciadorPedidosAluraApplication implements CommandLineRunner {
 		//principal.salvarNoBanco();
 		//principal.buscarProdutoPorNome("Iphone");
 		//principal.findByCategoria("Celulares");
-		principal.findProdutoByPrecoGreaterThan(3000.00);
+		//principal.findProdutoByPrecoGreaterThan(3000.00);
+		principal.findByPrecoLessThan(7000.00);
 	}
 
 }
