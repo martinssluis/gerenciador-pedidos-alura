@@ -34,7 +34,7 @@ public class Principal {
     }
 
     public void buscarProdutoPorNome(String nomeProduto){
-        List<Produto> produtos = produtoRepository.findByNomeContainingIgnoreCase(nomeProduto);
+        List<Produto> produtos = produtoRepository.findByNome(nomeProduto);
 
         if(produtos.isEmpty()){
             System.out.println("Nenhum produto encontrado com: " + nomeProduto);
@@ -65,6 +65,16 @@ public class Principal {
         List<Produto> produtos = produtoRepository.findByPrecoLessThan(preco);
         if (produtos.isEmpty()){
             System.out.println("Nenhum produto encontrado com preço menor que: R$"+preco);
+        }else {
+            produtos.forEach(System.out::println);
+        }
+    }
+
+    public void findByNomeContainingIgnoreCase(String estaNoNome){
+        List<Produto> produtos = produtoRepository.findByNomeContainingIgnoreCase(estaNoNome);
+
+        if(produtos.isEmpty()){
+            System.out.println("Nenhum produto encontrado com: " + estaNoNome);
         }else {
             produtos.forEach(System.out::println);
         }
