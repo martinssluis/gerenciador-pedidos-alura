@@ -19,8 +19,9 @@ public class GerenciadorPedidosAluraApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception{
 		//principal.salvarNoBanco();
-		principal.buscarProdutoPorNome("Iphone");
-		principal.findByCategoria("Celulares");
+		//principal.buscarProdutoPorNome("Iphone");
+		//principal.findByCategoria("Celulares");
+		principal.findProdutoByPrecoGreaterThan(3000.00);
 	}
 
 }
