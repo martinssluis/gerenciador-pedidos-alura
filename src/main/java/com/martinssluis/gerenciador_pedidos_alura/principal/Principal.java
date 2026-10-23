@@ -60,4 +60,13 @@ public class Principal {
             produtos.forEach(System.out::println);
         }
     }
+
+    public void findByPrecoLessThan(Double preco){
+        List<Produto> produtos = produtoRepository.findByPrecoLessThan(preco);
+        if (produtos.isEmpty()){
+            System.out.println("Nenhum produto encontrado com preço menor que: R$"+preco);
+        }else {
+            produtos.forEach(System.out::println);
+        }
+    }
 }
